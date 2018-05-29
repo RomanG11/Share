@@ -1,0 +1,28 @@
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function eth() {
+	console.log ('000');
+
+	$.ajax({
+        type: "GET",
+        url: "http://api.etherscan.io/api?module=account&action=tokentx&address=0x4e83362442b8d1bec281594cea3050c8eb01311c&startblock=0&endblock=999999999&sort=asc&apikey=YourApiKeyToken",
+        dataType: "json",
+
+        success: function(data) {
+			console.log (data.result[0].contractAddress);
+			// console.log('111');
+        },
+
+        error: function(error){
+            console.log("Error:");
+            console.log(error);
+        }
+    });
+}
+
+eth();
+
+
+</script>

@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container mt-3">
+            <div class="row">
+                <div class="col-4 col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">SHARE</div>
+                        <div style="font-size:14px" class="card-body text-right numbers">
+                            TOKEN: <span style="font-size:12px" id='token_addr'></span>
+                        </div>
+                        <div style="font-size:14px" class="card-body text-right numbers">
+                            CROWDSALE: <span style="font-size:12px" id='crowds_addr'></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">ETH collected</div>
+                        <div class="card-body text-right numbers" id="ethCollected">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">Tokens sold</div>
+                        <div class="card-body text-right numbers" id="tokensSold">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+          <div class="row">
+                <div class="col-4 col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Current phase</div>
+                        <div class="card-body text-center numbers" id="currentPhase">
+                            <span>2</span>
+                        </div>
+                    </div>
+                </div>
+         
+                <div class="col-4 col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Current stage</div>
+                        <div class="card-body text-center numbers" id="currentStage">
+                            <span>2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Current price</div>
+                        <div class="card-body text-center numbers" id="currentPrice">
+                            <span>2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+
+          <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens Manually</div>
+                        <div class="card-body">
+                            <!-- <form> -->
+                                <div class="form-group">
+                                    <label for="ethAddress">Enter ETH-address</label>
+                                    <input type="text" class="form-control" id="ethAddress" placeholder="ETH-address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="numberTokens">Enter number of tokens</label>
+                                    <input type="text" class="form-control" id="numberTokens" placeholder="Number of tokens">
+                                </div>
+                                <button class="btn btn-primary" onclick="sendTokensManually()">Send</button>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+          <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Is Tokens Locked</div>
+                        <div class="card-body text-center numbers" id="currentLockStatus">
+                            <span></span>
+                        </div>
+                        <button class="btn btn-primary" onclick="changeLock()">Change Lock Status</button>
+                    </div>
+                </div>
+          </div>
+        
+        <hr/>
+
+        <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Burn Unsoled Tokens</div>
+                        <button class="btn btn-primary" onclick="burnUnsoldTokens()">Burn</button>
+                    </div>
+                </div>
+          </div>
+
+        <hr/>
+
+
+            <h2 class="font-weight-bold">ICO Phase</h2>
+
+            <!-- <hr/> -->
+            <h3>Stage 1</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price1">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap1">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount1">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status1">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <!-- <form> -->
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price0" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(0,document.getElementById('new_price0').value)" >Set New Price</button>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(0)">Turn On / Off</button>
+                </div>
+
+            </div>
+
+            <hr/>
+            <h3>Stage 2</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price2">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap2">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount2">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status2">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price1" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(1,document.getElementById('new_price1').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(1)">Turn On / Off</button>
+                </div>
+
+            </div>
+
+            <hr/>
+            <h3>Stage 3</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price3">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap3">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount3">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status3">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price2" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(2,document.getElementById('new_price2').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(2)">Turn On / Off</button>
+                </div>
+            </div>
+            <hr/>
+
+
+
+
+            <!-- <h2 class="font-weight-bold">Main ICO Phase</h2> -->
+
+            <!-- <hr/> -->
+            <h3>Stage 4</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price4">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap4">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount4">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status4">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price3" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(3,document.getElementById('new_price3').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(3)">Turn On / Off</button>
+                </div>
+
+            </div>
+
+            <hr/>
+            <h3>Stage 5</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price5">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap5">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount5">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status5">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price4" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(4,document.getElementById('new_price4').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(4)">Turn On / Off</button>
+                </div>
+
+            </div>
+
+            <hr/>
+            <h3>Stage 6</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price6">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap6">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount6">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status6">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price5" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(5,document.getElementById('new_price5').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(5)">Turn On / Off</button>
+                </div>
+            </div>
+            <hr/>
+
+            <h3>Stage 7</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price7">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap7">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount7">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status7">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price6" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(6,document.getElementById('new_price6').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(6)">Turn On / Off</button>
+                </div>
+            </div>
+            <hr/>
+
+            <h3>Stage 8</h3>
+            <div class="row justify-content-between flex-wrap">
+                
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Tokens Price</div>
+                        <div class="card-body text-right numbers" id="token_price8">
+                            <span>10000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">MaxCap</div>
+                        <div class="card-body text-right numbers" id="max_cap8">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Discount</div>
+                        <div class="card-body text-right numbers" id="discount8">
+                            <span>1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">Status</div>
+                        <div class="card-body text-right numbers" id="status8">
+                            
+                                <!-- Show only one span depending on the status or use only one span and put status using JS -->
+                                <span class="text-success">Active</span>
+                                <!-- <span class="text-danger">Not Active</span> -->
+                            
+                            <!-- <button class="btn btn-primary">Change Status</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="card mb-3">
+                        <div class="card-header">New price</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="newPrice">Enter New Price</label>
+                                    <input type="text" class="form-control" id="new_price7" placeholder="Enter New Price">
+                                </div>
+                                <button class="btn btn-primary" onclick="changeIcoStageTokenPrice(7,document.getElementById('new_price7').value)">Set New Price</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" onclick="changeIcoPhaseStatus(7)">Turn On / Off</button>
+                </div>
+            </div>
+            <hr/>
+
+
+
+            <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Tokens Left</div>
+                        <div class="card-body text-center numbers" id="team_tokens">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens for TEAM</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ethAddress">Enter ETH-address</label>
+                                <input type="text" class="form-control" id="ethAddressTeam" placeholder="ETH-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberTokens">Enter number of tokens</label>
+                                <input type="text" class="form-control" id="numberTokensTeam" placeholder="Number of tokens">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendTeamTokens()">Send</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+          <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Tokens Left</div>
+                        <div class="card-body text-center numbers" id="bounty_tokens">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens for BOUNTY</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ethAddress">Enter ETH-address</label>
+                                <input type="text" class="form-control" id="ethAddressBounty" placeholder="ETH-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberTokens">Enter number of tokens</label>
+                                <input type="text" class="form-control" id="numberTokensBounty" placeholder="Number of tokens">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendBountyTokens()">Send</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+           <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Tokens Left</div>
+                        <div class="card-body text-center numbers" id="found_tokens">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens for FOUNDERS</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ethAddress">Enter ETH-address</label>
+                                <input type="text" class="form-control" id="ethAddressFound" placeholder="ETH-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberTokens">Enter number of tokens</label>
+                                <input type="text" class="form-control" id="numberTokensFound" placeholder="Number of tokens">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendFoundersTokens()">Send</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+
+           <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Tokens Left</div>
+                        <div class="card-body text-center numbers" id="plat_tokens">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens for PLATFORM</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ethAddress">Enter ETH-address</label>
+                                <input type="text" class="form-control" id="ethAddressPlat" placeholder="ETH-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberTokens">Enter number of tokens</label>
+                                <input type="text" class="form-control" id="numberTokensPlat" placeholder="Number of tokens">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendPlatformTokens()">Send</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+           <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">Tokens Left</div>
+                        <div class="card-body text-center numbers" id="adv_tokens">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">Send Tokens for ADVISORS</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ethAddress">Enter ETH-address</label>
+                                <input type="text" class="form-control" id="ethAddressAdv" placeholder="ETH-address">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberTokens">Enter number of tokens</label>
+                                <input type="text" class="form-control" id="numberTokensAdv" placeholder="Number of tokens">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendAdvisorsTokens()">Send</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+          <hr/>
+
+
+
+
+      </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./js/ShareMetamask.js"></script>
+  </body>
+</html>

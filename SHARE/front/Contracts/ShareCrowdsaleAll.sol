@@ -78,7 +78,7 @@ contract ShareCrowdsale is Ownable{
     owner = 0x4B9b958645122478a98cd5828849850F97c65Bc8;
 
     distributionAddress = 0x5d8baC0B5A94f02ff02E4180120cC1e789066728;
-
+    
     setupStages();
 
     token.setCrowdsaleContract(this);    
@@ -185,3 +185,4 @@ contract ShareCrowdsale is Ownable{
     distributionAddress.transfer(address(this).balance);
   }
 }
+

@@ -55,6 +55,7 @@ contract Ownable {
     }
   }
 }
+
 contract SHAREToken is Ownable { //ERC - 20 token contract
   using SafeMath for uint;
   // Triggered when tokens are transferred.
@@ -67,9 +68,6 @@ contract SHAREToken is Ownable { //ERC - 20 token contract
   string public constant name = "SHARE";
   uint8 public constant decimals = 6;
   uint256 _totalSupply = 200000000 * ((uint)(10) ** (uint)(decimals)); //include decimals;
-
-  // Owner of this contract
-  address public owner;
 
   // Balances for each account
   mapping(address => uint256) balances;
@@ -128,6 +126,7 @@ contract SHAREToken is Ownable { //ERC - 20 token contract
   constructor() public {
     owner = 0x4B9b958645122478a98cd5828849850F97c65Bc8;
     tokenHolder = 0x4B9b958645122478a98cd5828849850F97c65Bc8;
+    
     balances[tokenHolder] = _totalSupply;
     emit Transfer(address(this), tokenHolder, _totalSupply);
   }
@@ -159,7 +158,7 @@ contract SHAREToken is Ownable { //ERC - 20 token contract
   uint public bountyBalance = 6000000 * ((uint)(10) ** (uint)(decimals));
   uint public advisorsBalance = 4000000 * ((uint)(10) ** (uint)(decimals));
 
-  function sendTeamBalance (address[] _addresses, uint[] _values) external onlyOwner {
+  function sendTeamBalance (address[] _addresses, uint[] _values) public onlyOwner {
     uint buffer = 0;
     for(uint i = 0; i < _addresses.length; i++){
       balances[_addresses[i]] = balances[_addresses[i]].add(_values[i]);
@@ -221,10 +220,9 @@ contract SHAREToken is Ownable { //ERC - 20 token contract
   }
 
   function burnUnsoldTokens () public onlyOwner {
-    balances[this] = balances[this].sub(crowdsaleBalance);
-    emit Transfer(address(this), 0, crowdsaleBalance);
+    balances[tokenHolder] = balances[tokenHolder].sub(crowdsaleBalance);
+    emit Transfer(tokenHolder, 0, crowdsaleBalance);
+    _totalSupply = _totalSupply.sub(crowdsaleBalance);
     crowdsaleBalance = 0;
   }
-  
-  
 }
